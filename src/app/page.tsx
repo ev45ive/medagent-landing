@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-white">
       <style>
         {
           /* css */ `
@@ -123,7 +123,7 @@ export default function Home() {
                 id="email"
                 name="email"
                 required
-                className="w-full rounded border border-gray-300 p-2 mt-1"
+                className="w-full rounded border text-black border-gray-300 p-2 mt-1"
                 value="ev45ive+banana@gmail.com"
               />
             </div>
@@ -140,7 +140,7 @@ export default function Home() {
                 id="phone"
                 name="phone"
                 required
-                className="w-full rounded border border-gray-300 p-2 mt-1"
+                className="w-full rounded border text-black border-gray-300 p-2 mt-1"
                 value="506619044"
               />
             </div>
@@ -155,7 +155,7 @@ export default function Home() {
               <textarea
                 id="message"
                 name="message"
-                className="w-full rounded border border-gray-300 p-2 mt-1"
+                className="w-full rounded border text-black border-gray-300 p-2 mt-1"
               ></textarea>
             </div>
 
@@ -237,7 +237,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-screen mt-5 bg-amber-100">
+      <section className="w-screen mt-5 bg-amber-100 text-black">
         <div className="container mx-auto">
           <div className="grid sm:grid-cols-3 gap-5 py-10 font-bold">
             <div>
