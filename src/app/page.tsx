@@ -1,4 +1,72 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
+
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  "X-Auth-Token": process.env["GETRESPONSE_KEY"]!,
+};
+
+async function addContact(form: FormData) {
+  "use server";
+
+  const res = await fetch("https://api.getresponse.com/v3/contacts", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      name: form.get("name"),
+      campaign: {
+        campaignId: "X80TZ",
+      },
+      email: form.get("email"),
+      dayOfCycle: "42",
+      scoring: 8,
+      ipAddress: "1.2.3.4",
+      tags: [
+        // {
+        //   tagId: "m7E2",
+        // },
+      ],
+      customFieldValues: [
+        // {
+        //   customFieldId: "phone",
+        //   value: ["18-35"],
+        // },
+      ],
+    }),
+  });
+
+  redirect("/thankyou");
+}
+
+const Header = (
+  <div className="grid gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
+    <img
+      src="11d83a0d-d2e6-4c06-8192-8a7321172561.png"
+      alt=""
+      className="w-20 md:w-40 md:absolute z-50"
+    />
+
+    <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center md:hidden">
+      Ubezpieczenie <br className="hidden md:inlin" />
+      OC Lekarza <span className="italic font-medium">online</span>
+    </h1>
+  </div>
+);
+const SebaAvatar = (
+  <div className="relative">
+    <img
+      src="seba.png"
+      alt="Sebastian Nowak"
+      className="object-fill w-[60%] md:w-[80%] mx-auto"
+    />
+    <div className="bg-teal p-4 text-sm md:text-xl rounded-lg shadow-md text-white transform w-[80%] mx-auto text-center">
+      Nazywam się Sebastian Nowak. <br />
+      Jestem specjalistą ds. ubezpieczeń dla branży medycznej. Współpracuję
+      głównie z TU Inter Polska, a także PZU i LLoyds.
+    </div>
+  </div>
+);
 
 export default function Home() {
   return (
@@ -28,33 +96,11 @@ export default function Home() {
         }
       </style>
       <section className="mx-auto container px-5 py-8 text-green-800 grid gap-2 md:gap-5">
-        <div className="grid gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
-          <img
-            src="11d83a0d-d2e6-4c06-8192-8a7321172561.png"
-            alt=""
-            className="w-20 md:w-40 md:absolute z-50"
-          />
-
-          <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center md:hidden">
-            Ubezpieczenie <br className="hidden md:inlin" />
-            OC Lekarza <span className="italic font-medium">online</span>
-          </h1>
-        </div>
+        {Header}
         <div className="grid gap-10 md:grid-cols-2 mx-5">
-          <div className="relative">
-            <img
-              src="seba.png"
-              alt="Sebastian Nowak"
-              className="object-fill w-[60%] md:w-[80%] mx-auto"
-            />
-            <div className="bg-teal p-4 text-sm md:text-xl rounded-lg shadow-md text-white transform w-[80%] mx-auto text-center">
-              Nazywam się Sebastian Nowak. <br />
-              Jestem specjalistą ds. ubezpieczeń dla branży medycznej.
-              Współpracuję głównie z TU Inter Polska, a także PZU i LLoyds.
-            </div>
-          </div>
+          {SebaAvatar}
 
-          <div className="grid gap-8 content-start">
+          <div className="grid gap-3 md:gap-8 content-start">
             <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center hidden md:block">
               Ubezpieczenie <br className="hidden md:inlin" />
               OC Lekarza <span className="italic font-medium">online</span>
@@ -110,7 +156,7 @@ export default function Home() {
             Oddzwonię w najbliższej wolnej chwili i porozmawiamy 😊
           </p>
 
-          <form className="space-y-4">
+          <form className="space-y-4" action={addContact}>
             <div>
               <label
                 className="block font-medium text-green-800"
@@ -123,7 +169,7 @@ export default function Home() {
                 id="email"
                 name="email"
                 required
-                className="w-full rounded border text-black border-gray-300 p-2 mt-1"
+                className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
                 value="ev45ive+banana@gmail.com"
               />
             </div>
@@ -140,7 +186,7 @@ export default function Home() {
                 id="phone"
                 name="phone"
                 required
-                className="w-full rounded border text-black border-gray-300 p-2 mt-1"
+                className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
                 value="506619044"
               />
             </div>
@@ -155,7 +201,7 @@ export default function Home() {
               <textarea
                 id="message"
                 name="message"
-                className="w-full rounded border text-black border-gray-300 p-2 mt-1"
+                className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
               ></textarea>
             </div>
 
