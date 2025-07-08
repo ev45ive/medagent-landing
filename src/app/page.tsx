@@ -1,43 +1,5 @@
 import Image from "next/image";
-import { redirect } from "next/navigation";
-
-const headers = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-  "X-Auth-Token": process.env["GETRESPONSE_KEY"]!,
-};
-
-async function addContact(form: FormData) {
-  "use server";
-
-  const res = await fetch("https://api.getresponse.com/v3/contacts", {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify({
-      name: form.get("name"),
-      campaign: {
-        campaignId: "X80TZ",
-      },
-      email: form.get("email"),
-      dayOfCycle: "42",
-      scoring: 8,
-      ipAddress: "1.2.3.4",
-      tags: [
-        // {
-        //   tagId: "m7E2",
-        // },
-      ],
-      customFieldValues: [
-        // {
-        //   customFieldId: "phone",
-        //   value: ["18-35"],
-        // },
-      ],
-    }),
-  });
-
-  redirect("/thankyou");
-}
+import { addContact } from "./addContact";
 
 const Header = (
   <div className="grid gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
@@ -53,6 +15,7 @@ const Header = (
     </h1>
   </div>
 );
+
 const SebaAvatar = (
   <div className="relative">
     <img
@@ -71,30 +34,6 @@ const SebaAvatar = (
 export default function Home() {
   return (
     <div className="bg-white">
-      <style>
-        {
-          /* css */ `
-      .text-green-800 {
-        color: rgb(83, 120, 105) !important;
-      }
-
-      .bg-teal {
-        background-color: #447c92;
-      }
-
-      body {
-        font-family: "Open Sans", sans-serif;
-      }
-
-      ul {
-        list-style-type: disclosure-closed !important;
-        line-height: 2rem;
-      }
-      html {
-        scroll-behavior: smooth;
-      }`
-        }
-      </style>
       <section className="mx-auto container px-5 py-8 text-green-800 grid gap-2 md:gap-5">
         {Header}
         <div className="grid gap-10 md:grid-cols-2 mx-5">
@@ -170,7 +109,7 @@ export default function Home() {
                 name="email"
                 required
                 className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
-                value="ev45ive+banana@gmail.com"
+                placeholder="Adres email"
               />
             </div>
 
@@ -187,7 +126,7 @@ export default function Home() {
                 name="phone"
                 required
                 className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
-                value="506619044"
+                placeholder="Numer telefonu"
               />
             </div>
 

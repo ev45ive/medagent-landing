@@ -12,15 +12,36 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.text-green-800 {
+  color: rgb(83, 120, 105) !important;
+}
+
+.bg-teal {
+  background-color: #447c92;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+ul {
+  list-style-type: disclosure-closed !important;
+  line-height: 2rem;
+}
+html {
+  scroll-behavior: smooth;
 }
