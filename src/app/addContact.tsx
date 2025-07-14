@@ -10,9 +10,10 @@ export async function addContact(form: FormData) {
 
   try {
     await sendSMS(
-      `Medagent - Kontakt - ${
-        form.get("email") ?.toString().replace('.',' . ')
-      } - ${
+      `Medagent - Kontakt - ${form
+        .get("email")
+        ?.toString()
+        .replace(".", " . ")} - ${
         form.get("phone") //
       } - ${
         form.get("message") //
@@ -126,7 +127,10 @@ const PhoneField = (value: string | FormDataEntryValue | null) => ({
   customFieldId: "nOf4I7",
   value: [
     // Add +48 if missing:
-    value?.toString().replace(/([\+0]?48)?(.*?)/, "+48$2"),
+    value
+      ?.toString()
+      .replace(/([\+0]?48)?(.*?)/, "048$2")
+      .replace(/\s+/g, ""),
   ],
 });
 
