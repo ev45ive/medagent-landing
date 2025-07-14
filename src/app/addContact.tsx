@@ -2,12 +2,6 @@
 import { redirect } from "next/navigation";
 
 export async function addContact(form: FormData) {
-  const headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    "X-Auth-Token": process.env["GETRESPONSE_KEY"]!,
-  };
-
   try {
     await sendSMS(
       `Medagent - Kontakt - ${form
@@ -20,36 +14,44 @@ export async function addContact(form: FormData) {
       }`
     );
 
-    const res = await fetch("https://api.getresponse.com/v3/contacts", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify({
-        campaign: CampaignId,
-        // name: form.get("name"),
-        email: form.get("email"),
-        tags: [MedAgentTag],
-
-        customFieldValues: [
-          CountryField("Poland"),
-          PhoneField(form.get("phone")),
-          MessageField(form.get("message")),
-        ].filter(Boolean),
-        // dayOfCycle: "42",
-        // scoring: 8,
-        // ipAddress: "1.2.3.4",
-      }),
-    });
-
-    const body = await res.text();
-    try {
-      console.log("res", JSON.parse(body));
-    } catch (e) {
-      console.log("res", body);
-    }
+    await activecampaignContactAdd(form);
   } catch (e) {
     console.error(e);
   }
   redirect("/thankyou");
+}
+
+async function activecampaignContactAdd(form: FormData) {
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "Api-Token": process.env["ACTIVECAMPAIGN_TOKEN"]!,
+  };
+
+  const res = await fetch("https://ev45ive.activehosted.com/api/3/contacts?", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      contact: {
+        email: form.get("email"),
+        phone: form.get("phone"),
+        // firstName: "John",
+        // lastName: "Doe",
+        fieldValues: [
+          {
+            field: "2",
+            value: form.get("message") || "",
+          },
+          // {
+          //   field: "6",
+          //   value: "2008-01-20",
+          // },
+        ],
+      },
+    }),
+  });
+
+  console.log("AC", await res.text());
 }
 
 async function sendSMS(message: string) {
@@ -74,6 +76,43 @@ async function sendSMS(message: string) {
   console.log(body);
 
   return Response.json(body);
+}
+
+async function getresponseContactAdd(form: FormData) {
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "X-Auth-Token": process.env["GETRESPONSE_KEY"]!,
+  };
+
+  const res = await fetch("https://api.getresponse.com/v3/contacts", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      campaign: CampaignId,
+      // name: form.get("name"),
+      email: form.get("email"),
+      tags: [MedAgentTag],
+
+      customFieldValues: [
+        CountryField("Poland"),
+        PhoneField(form.get("phone")),
+        MessageField(form.get("message")),
+      ].filter(Boolean),
+      // dayOfCycle: "42",
+      // scoring: 8,
+      // ipAddress: "1.2.3.4",
+    }),
+  });
+
+  const body = await res.text();
+  console.log("body", body);
+
+  try {
+    console.log("res", JSON.parse(body));
+  } catch (e) {
+    console.log("res", body);
+  }
 }
 
 // https://www.smsapi.pl/docs/?#2-pojedynczy-sms
