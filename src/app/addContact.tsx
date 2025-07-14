@@ -28,7 +28,7 @@ async function activecampaignContactAdd(form: FormData) {
     "Api-Token": process.env["ACTIVECAMPAIGN_TOKEN"]!,
   };
 
-  const res = await fetch("https://ev45ive.activehosted.com/api/3/contacts?", {
+  const res = await fetch(process.env['ACTIVECAMPAIGN_API']+"contacts?", {
     method: "POST",
     headers,
     body: JSON.stringify({
@@ -62,7 +62,8 @@ async function sendSMS(message: string) {
       new URLSearchParams({
         from: "2WAY",
         to: "48506619044",
-        message,
+        // https://www.smsapi.pl/docs#20-alfabet-7bit-gsm
+        message: message.slice(0, 160),
         format: "json",
         encoding: "utf-8",
       }),
