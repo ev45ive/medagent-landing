@@ -1,5 +1,46 @@
 import ky from "ky";
 
+const NOTIFICATION_SMS_TO = "48603438638";
+
+export async function GET(request: Request) {
+  try {
+    const form = new FormData();
+
+    const random = "pierdola 123";
+    form.set("email", `banana+${random}@banana.com`);
+    form.set("phone", "+48506619044");
+    form.set("message", "wiadomosc " + random);
+
+    let notification_message = [
+      "Medagent:",
+      form.get("phone"),
+      form.get("email"),
+      form.get("message"),
+    ].join(" ");
+
+    let data = await new SMSAPIClient("OC Lekarza").send(
+      NOTIFICATION_SMS_TO,
+      notification_message
+    );
+
+    const confirmation =
+      "Dziękuję za kontakt. Oddzwonie najszybciej jak bedę mogł.";
+
+    await new SMSAPIClient("OC Lekarza").send(
+      "" + form.get("phone"),
+      confirmation
+    );
+
+    return Response.json(data);
+  } catch (error: any) {
+    console.error("SMS API error:", error);
+    return Response.json(
+      { error: error?.message ?? "Failed to send SMS" },
+      { status: 500 }
+    );
+  }
+}
+
 const SMSAPI = ky.create({
   headers: {
     // https://ssl.smsapi.pl/react/oauth/manage
@@ -15,58 +56,28 @@ const MAX_SMS_LENGTH = 159;
 // https://www.smsapi.pl/docs#20-alfabet-7bit-gsm
 // https://www.smsapi.pl/docs/?#2-pojedynczy-sms
 
-export async function GET(request: Request) {
-  try {
-    const form = new FormData();
+class SMSAPIClient {
+  constructor(private from: string) {}
 
-    const random = "pierdola";
-    form.set("email", `banana+${random}@banana.com`);
-    form.set("phone", "+48" + random);
-    form.set("message", "wiadomosc " + random);
+  async send(to: string, message: string) {
+    message = message.slice(0, MAX_SMS_LENGTH);
 
-    const confirmation =
-      "Dziękuję za kontakt. Oddzwonie najszybciej jak bedę mogł.";
-
-    let message = [
-      "Medagent:",
-      form.get("phone"),
-      form.get("email"),
-      form.get("message"),
-    ].join(" ");
-
-    let data = await SMSAPI_send({
+    const payload = {
+      from: this.from,
+      to,
       message,
-      from: "OC Lekarza",
-      to: "48603438638",
+      format: "json",
+      encoding: "utf-8",
+    };
+
+    const res = await SMSAPI.get("sms.do", {
+      searchParams: payload,
     });
+
+    const data = res.json();
 
     console.log("Wysyłka SMS: ", data);
 
-    return Response.json(data);
-  } catch (error: any) {
-    console.error("SMS API error:", error);
-    return Response.json(
-      { error: error?.message ?? "Failed to send SMS" },
-      { status: 500 }
-    );
+    return await data;
   }
-}
-async function SMSAPI_send({
-  from,
-  message,
-  to,
-}: {
-  message: string;
-  from: string;
-  to: string;
-}) {
-  message = message.slice(0, MAX_SMS_LENGTH);
-
-  const payload = { from, to, message, format: "json", encoding: "utf-8" };
-
-  const res = await SMSAPI.get("sms.do", {
-    searchParams: payload,
-  });
-
-  return await res.json();
 }
