@@ -33,6 +33,9 @@ body {
 .bg-teal {
   background-color: #447c92;
 }
+.bg-teal-300 {
+  background-color: #5faccb;
+}
 
 body {
   font-family: "Open Sans", sans-serif;

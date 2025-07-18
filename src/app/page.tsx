@@ -6,7 +6,7 @@ const Header = (
     <img
       src="11d83a0d-d2e6-4c06-8192-8a7321172561.png"
       alt=""
-      className="w-20 md:w-40 md:absolute z-50"
+      className="w-60 md:w-60 md:absolute z-50 mx-auto"
     />
 
     <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center md:hidden">
@@ -26,9 +26,24 @@ const SebaAvatar = (
     <div className="bg-teal p-4 text-sm md:text-xl rounded-lg shadow-md text-white transform w-[80%] mx-auto text-center">
       Nazywam się Sebastian Nowak. <br />
       Jestem specjalistą ds. ubezpieczeń dla branży medycznej. Współpracuję
-      głównie z TU Inter Polska, a także PZU i LLoyds.
+      głównie z TU Inter Polska, a także PZU, Wartą, Hestią i LLoyds.
     </div>
   </div>
+);
+const ZamawiamKontakt = (
+  <a
+    href="#form"
+    className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200 my-8 place-self-center
+      hover:bg-green-700
+      focus:bg-green-700
+      focus:outline-none
+      focus:ring-2
+      focus:ring-green-400
+      active:bg-green-900"
+    tabIndex={0}
+  >
+    Zamawiam kontakt z agentem
+  </a>
 );
 
 export default function Home() {
@@ -36,7 +51,7 @@ export default function Home() {
     <div className="bg-white">
       <section className="mx-auto container px-5 py-8 text-green-800 grid gap-2 md:gap-5">
         {Header}
-        <div className="grid gap-10 md:grid-cols-2 mx-5">
+        <div className="grid gap-10 md:grid-cols-2 mx-5 items-center">
           {SebaAvatar}
 
           <div className="grid gap-3 md:gap-8 content-start">
@@ -49,12 +64,7 @@ export default function Home() {
               Lekarza?
             </p>
 
-            <a
-              href="#form"
-              className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow hover:bg-green-800 transition my-8"
-            >
-              Zamawiam kontakt z agentem
-            </a>
+            {ZamawiamKontakt}
 
             <ul className="pl-5 space-y-1 text-lg grid gap-3">
               <li>omówimy kluczowe kwestie Twojego ubezpieczenia</li>
@@ -73,34 +83,24 @@ export default function Home() {
               </li>
             </ul>
 
-            <a
-              href="#form"
-              className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow hover:bg-green-800 transition my-8"
-            >
-              Zamawiam kontakt z agentem
-            </a>
+            {ZamawiamKontakt}
           </div>
         </div>
       </section>
 
       <section
         id="form"
-        className="flex flex-col items-center justify-center py-12 px-4 bg-white"
+        className="flex flex-col items-center justify-center py-8 px-4 bg-white"
       >
-        <div className="bg-green-100 rounded-xl p-8 w-full max-w-md shadow-md">
-          <h2 className="text-xl font-bold text-green-800 mb-2">
-            Wypełnij formularz
-          </h2>
-          <p className="text-green-800 mb-4">
+        <div className="bg-teal text-white rounded-xl p-8 w-full max-w-lg shadow-md">
+          <h2 className="text-xl font-bold  mb-2">Wypełnij formularz</h2>
+          <p className=" mb-4">
             Oddzwonię w najbliższej wolnej chwili i porozmawiamy 😊
           </p>
 
           <form className="space-y-4" action={addContact}>
             <div>
-              <label
-                className="block font-medium text-green-800"
-                htmlFor="email"
-              >
+              <label className="block font-medium " htmlFor="email">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -114,10 +114,7 @@ export default function Home() {
             </div>
 
             <div>
-              <label
-                className="block font-medium text-green-800"
-                htmlFor="phone"
-              >
+              <label className="block font-medium " htmlFor="phone">
                 Nr Telefonu <span className="text-red-500">*</span>
               </label>
               <input
@@ -131,15 +128,13 @@ export default function Home() {
             </div>
 
             <div>
-              <label
-                className="block font-medium text-green-800"
-                htmlFor="message"
-              >
+              <label className="block font-medium " htmlFor="message">
                 Dodatkowe informacje, uwagi, pytania...
               </label>
               <textarea
                 id="message"
                 name="message"
+                placeholder="Pole opcjonalne"
                 className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
               ></textarea>
             </div>
@@ -164,7 +159,13 @@ export default function Home() {
 
             <button
               type="submit"
-              className="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-800"
+              className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200  mx-auto
+      hover:bg-green-700
+      focus:bg-green-700
+      focus:outline-none
+      focus:ring-2
+      focus:ring-green-400
+      active:bg-green-900"
             >
               Zamawiam kontakt z agentem
             </button>
@@ -172,7 +173,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-4 py-12 text-center container mx-auto">
+      <section className="px-4 py-12 text-center container mx-auto w-[80%] sm:w-[90%]">
         <h2 className="text-3xl font-bold mb-8">Jak działam?</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div>
@@ -207,7 +208,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="h-[50vh] sm:h-[70vh] md:h-[100vh] mt-[100px] relative bg-black">
+        <div className="hidden sm:block h-[50vh] sm:h-[70vh] md:h-[100vh] mt-[100px] relative bg-black">
           <div
             className="left-0 right-0 top-0 bottom-0 absolute bg-black opacity-65"
             style={{
