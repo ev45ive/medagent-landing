@@ -1,6 +1,13 @@
 import Image from "next/image";
 import { addContact } from "./lib/addContact";
 
+import headerImg from "../../public/11d83a0d-d2e6-4c06-8192-8a7321172561.png";
+import sebaImg from "../../public/seba.png";
+import rozmowaImg from "../../public/001cbad0-9565-4843-88f6-26b095d97611.png";
+import linkImg from "../../public/4ae010a2-dca6-4fb8-b0bd-c64516287ef4.png";
+import umowaImg from "../../public/4649ff3d-bc95-44c5-884e-ee4b51546491.jpg";
+import bgImg from "../../public/fd9800af-827c-40c9-9e02-44cdbbfa565e.png";
+
 const Header = (
   <div className="grid gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
     <img
@@ -180,8 +187,8 @@ export default function Home() {
             <h3 className="text-lg font-semibold mb-2 text-green-800">
               Krótka rozmowa
             </h3>
-            <img
-              src="001cbad0-9565-4843-88f6-26b095d97611.png"
+            <Image
+              src={rozmowaImg}
               alt="Krótka rozmowa"
               className="rounded shadow"
             />
@@ -190,8 +197,8 @@ export default function Home() {
             <h3 className="text-lg font-semibold mb-2 text-green-800">
               Wysłanie linku
             </h3>
-            <img
-              src="4ae010a2-dca6-4fb8-b0bd-c64516287ef4.png"
+            <Image
+              src={linkImg}
               alt="Wysłanie linku"
               className="rounded shadow"
             />
@@ -200,8 +207,8 @@ export default function Home() {
             <h3 className="text-lg font-semibold mb-2 text-green-800">
               Zawarta umowa
             </h3>
-            <img
-              src="4649ff3d-bc95-44c5-884e-ee4b51546491.jpg"
+            <Image
+              src={umowaImg}
               alt="Zawarta umowa"
               className="rounded shadow"
             />
