@@ -1,6 +1,19 @@
 import ky from "ky";
 
-const activeCampaignAPI = ky.create({
+export type Contact = {
+  id: string;
+  email: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+  cdate: string;
+  udate: string;
+  orgid: string;
+  orgname: string;
+  accountContacts: any[];
+};
+
+export const activeCampaignAPI = ky.create({
   prefixUrl: process.env["ACTIVECAMPAIGN_API"],
   headers: {
     Accept: "application/json",
@@ -13,7 +26,7 @@ export async function GET(request: Request) {
   try {
     const form = new FormData();
 
-    form.set("email", `ev45ive@gmai.com`);
+    form.set("email", `ev45ive+1231231313131@banana.com`);
     form.set("phone", "+48506619044");
     form.set("message", "wiadomosc " + Date.now());
 
@@ -21,10 +34,10 @@ export async function GET(request: Request) {
       contact: {
         email: form.get("email"),
         phone: form.get("phone"),
-        firstName: "John",
-        lastName: "Doe",
-        // return Response.json(await activeCampaignAPI.get("fields").json());
+        // firstName: "John",
+        // lastName: "Doe",
         fieldValues: [
+          // return Response.json(await activeCampaignAPI.get("fields").json());
           {
             field: "1",
             value: form.get("message") || "",
@@ -61,16 +74,3 @@ export async function GET(request: Request) {
     );
   }
 }
-
-type Contact = {
-  id: string;
-  email: string;
-  phone: string;
-  firstName: string;
-  lastName: string;
-  cdate: string;
-  udate: string;
-  orgid: string;
-  orgname: string;
-  accountContacts: any[];
-};
