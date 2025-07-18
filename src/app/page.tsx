@@ -224,13 +224,13 @@ export default function Home() {
       </section>
 
       <section className="w-screen mt-5 bg-amber-100 text-black">
-        <div className="container mx-auto">
-          <div className="grid sm:grid-cols-3 gap-5 py-10 font-bold">
+        <div className="w-[90%] container mx-auto">
+          <div className="grid sm:grid-cols-3 gap-5 py-10 font-bold items-start">
             <div>
               <img
                 src="11d83a0d-d2e6-4c06-8192-8a7321172561.png"
                 alt=""
-                className="w-20 md:w-40 md:absolute z-50"
+                className="w-40 md:w-40 md:absolute z-50"
               />
             </div>
             <div className="grid gap-2">
@@ -239,8 +239,19 @@ export default function Home() {
               <div>Majątek i życie</div>
             </div>
             <div className="grid gap-2">
-              <div>info@medagent.pl</div>
-              <div>kontakt telefoniczny dostępny po zamówieniu kontaktu</div>
+              <div>
+                <div>SUGGERO SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ</div>
+                <br />
+                <div>KRS: 0000415242</div>
+                <div>NIP: 7811877798</div>
+                <div>Regon: 302075257</div>
+                <div>
+                  Adres: ul. Szydłowska 16A, 60-651 Poznań, Wielkopolskie
+                </div>
+                <br />
+                <div>info@medagent.pl</div>
+                <div>kontakt telefoniczny dostępny po zamówieniu kontaktu</div>
+              </div>
             </div>
           </div>
         </div>
