@@ -21,13 +21,20 @@ export async function addContact(form: FormData) {
     const confirmation =
       "Dziękuję za kontakt. Oddzwonie najszybciej jak bedę mogł.";
 
-    const data = smsClient.send("" + form.get("phone"), confirmation);
-
     await Promise.allSettled([
       smsClient.send(NOTIFICATION_SMS_TO, notification_message),
       email(form),
-      data,
     ]);
+
+    // Notify client
+    const clientPhone = form.get("phone")?.toString() ?? "";
+    const cleanedPhone = clientPhone
+      .replace(/[^\d]/g, "") // non digit
+      .replace(/^0+/g, ""); // leading 0s
+    const normalizedPhone = cleanedPhone.startsWith("48")
+      ? cleanedPhone
+      : `48${cleanedPhone}`;
+    const data = smsClient.send(normalizedPhone, confirmation);
 
     console.error("SMS API data:", await data);
   } catch (error: any) {
