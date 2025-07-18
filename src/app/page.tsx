@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { addContact } from "./addContact";
+import { addContact } from "./lib/addContact";
 
 const Header = (
   <div className="grid gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
