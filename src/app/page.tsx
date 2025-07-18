@@ -10,10 +10,11 @@ import bgImg from "../../public/fd9800af-827c-40c9-9e02-44cdbbfa565e.png";
 
 const Header = (
   <div className="grid gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
-    <img
-      src="11d83a0d-d2e6-4c06-8192-8a7321172561.png"
+    <Image
+      src={headerImg}
       alt=""
       className="w-60 md:w-60 md:absolute z-50 mx-auto"
+      priority
     />
 
     <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center md:hidden">
@@ -25,10 +26,11 @@ const Header = (
 
 const SebaAvatar = (
   <div className="relative">
-    <img
-      src="seba.png"
+    <Image
+      src={sebaImg}
       alt="Sebastian Nowak"
       className="object-fill w-[60%] md:w-[80%] mx-auto"
+      priority
     />
     <div className="bg-teal p-4 text-sm md:text-xl rounded-lg shadow-md text-white transform w-[80%] mx-auto text-center">
       Nazywam się Sebastian Nowak. <br />
@@ -37,6 +39,7 @@ const SebaAvatar = (
     </div>
   </div>
 );
+
 const ZamawiamKontakt = (
   <a
     href="#form"
@@ -146,24 +149,6 @@ export default function Home() {
               ></textarea>
             </div>
 
-            {/*     <div  className="bg-red-100 text-red-700 p-2 rounded  flex items-center gap-2"
-      >
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M18.364 5.636l-1.414 1.414L12 12.001l-4.95-4.95L5.636 7.05 10.586 12l-4.95 4.95 1.414 1.414L12 13.415l4.95 4.95 1.414-1.414L13.414 12l4.95-4.95z"
-          />
-        </svg>
-        <span>Sorry, your submission failed. Please try again.</span>
-      </div>   */}
-
             <button
               type="submit"
               className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200  mx-auto
@@ -234,10 +219,11 @@ export default function Home() {
         <div className="w-[90%] container mx-auto">
           <div className="grid sm:grid-cols-3 gap-5 py-10 font-bold items-start">
             <div>
-              <img
-                src="11d83a0d-d2e6-4c06-8192-8a7321172561.png"
+              <Image
+                src={headerImg}
                 alt=""
                 className="w-40 md:w-40 md:absolute z-50"
+                priority
               />
             </div>
             <div className="grid gap-2">
