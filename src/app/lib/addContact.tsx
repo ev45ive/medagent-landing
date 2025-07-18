@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { activecampaignContactAdd } from "./activecampaignContactAdd";
 import { SMSAPIClient } from "./sendSMS";
-import { activeCampaignAPI, Contact } from "../api/email/route";
+import { activeCampaignAPI, Contact } from "./activeCampaign";
 
 const NOTIFICATION_SMS_TO = "48603438638";
 const LIST_ID = "4";
