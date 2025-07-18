@@ -151,7 +151,7 @@ export default function Home() {
 
             <button
               type="submit"
-              className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200  mx-auto
+              className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200  mx-auto block
       hover:bg-green-700
       focus:bg-green-700
       focus:outline-none
@@ -237,10 +237,6 @@ export default function Home() {
                 <br />
                 <div>KRS: 0000415242</div>
                 <div>NIP: 7811877798</div>
-                <div>Regon: 302075257</div>
-                <div>
-                  Adres: ul. Szydłowska 16A, 60-651 Poznań, Wielkopolskie
-                </div>
                 <br />
                 <div>info@medagent.pl</div>
                 <div>kontakt telefoniczny dostępny po zamówieniu kontaktu</div>
