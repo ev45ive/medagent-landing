@@ -240,7 +240,7 @@ export default function Home() {
             </div>
             <div className="grid gap-2">
               <div>
-                <div>SUGGERO SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ</div>
+                <div>SUGGERO spółka z o.o.</div>
                 <br />
                 <div>KRS: 0000415242</div>
                 <div>NIP: 7811877798</div>
