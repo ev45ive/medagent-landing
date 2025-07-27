@@ -33,7 +33,7 @@ export class SMSAPIClient {
       searchParams: payload,
     });
 
-    const data = res.json();
+    const data = await res.json();
 
     console.log("Wysyłka SMS: ", data);
 
