@@ -114,6 +114,7 @@ export default function Home() {
                 Email <span className="text-red-500">*</span>
               </label>
               <input
+                autoComplete="email"
                 type="email"
                 id="email"
                 name="email"
@@ -128,6 +129,7 @@ export default function Home() {
                 Nr Telefonu <span className="text-red-500">*</span>
               </label>
               <input
+                autoComplete="tel"
                 type="tel"
                 id="phone"
                 name="phone"
@@ -148,6 +150,11 @@ export default function Home() {
                 className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
               ></textarea>
             </div>
+
+            <div
+              className="cf-turnstile"
+              data-sitekey={process.env["NEXT_PUBLIC_CF_TURNSTILE"]}
+            ></div>
 
             <button
               type="submit"

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { activecampaignContactAdd } from "./activecampaignContactAdd";
 import { SMSAPIClient } from "./sendSMS";
 import { activeCampaignAPI, Contact } from "./activeCampaign";
+import { checkBotId } from "botid/server";
 
 const NOTIFICATION_SMS_TO = "48603438638";
 const LIST_ID = "4";
@@ -11,6 +12,15 @@ const smsClient = new SMSAPIClient("OC Lekarza");
 
 export async function addContact(form: FormData) {
   try {
+    const verification = await checkBotId();
+
+    const token = form.get("cf-turnstile-response");
+    console.log("CF_TOKEN", token);
+
+    if (verification.isBot) {
+      throw new Error("Access denied");
+    }
+
     let notification_message = [
       "Medagent:",
       form.get("phone"),
