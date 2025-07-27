@@ -13,11 +13,10 @@ const smsClient = new SMSAPIClient("OC Lekarza");
 export async function addContact(form: FormData) {
   try {
     const verification = await checkBotId();
-
     const token = form.get("cf-turnstile-response");
     console.log("CF_TOKEN", token);
 
-    if (verification.isBot) {
+    if (verification.isBot || !token) {
       throw new Error("Access denied");
     }
 
