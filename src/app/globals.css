@@ -25,7 +25,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 .text-green-800 {
   color: rgb(83, 120, 105) !important;
 }
@@ -48,3 +47,7 @@ ul {
 html {
   scroll-behavior: smooth;
 }
+
+/* .cf-turnstile {
+  display: none;
+} */

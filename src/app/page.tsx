@@ -24,6 +24,78 @@ const Header = (
   </div>
 );
 
+const RequestContactForm = () => (
+  <form className="space-y-4" action={addContact}>
+    <div>
+      <label className="block font-medium " htmlFor="email">
+        Email <span className="text-red-500">*</span>
+      </label>
+      <input
+        autoComplete="email"
+        type="email"
+        id="email"
+        name="email"
+        required
+        className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
+        placeholder="Adres email"
+      />
+    </div>
+
+    <div>
+      <label className="block font-medium " htmlFor="phone">
+        Nr Telefonu <span className="text-red-500">*</span>
+      </label>
+      <input
+        autoComplete="tel"
+        type="tel"
+        id="phone"
+        name="phone"
+        required
+        className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
+        placeholder="Numer telefonu"
+      />
+    </div>
+
+    <div>
+      <label className="block font-medium " htmlFor="message">
+        Dodatkowe informacje, uwagi, pytania...
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Pole opcjonalne"
+        className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
+      ></textarea>
+    </div>
+    <script>{
+      /* js */ `
+      window.BotProtectionCallback = () => {
+        const btn = document.getElementById('submiteRequestForm')
+        btn.disabled = false
+        btn.textContent = 'Zamawiam kontakt z agentem'
+      }
+    `
+    }</script>
+
+    <BotProtection />
+
+    <button
+      id="submiteRequestForm"
+      type="submit"
+      disabled
+      className="bg-green-800 disabled:bg-gray-500 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200  mx-auto block
+      hover:bg-green-700
+      focus:bg-green-700
+      focus:outline-none
+      focus:ring-2
+      focus:ring-green-400
+      active:bg-green-900"
+    >
+      Zamawiam kontakt z agentem
+    </button>
+  </form>
+);
+
 const SebaAvatar = (
   <div className="relative">
     <Image
@@ -55,6 +127,16 @@ const ZamawiamKontakt = (
     Zamawiam kontakt z agentem
   </a>
 );
+
+function BotProtection() {
+  return (
+    <div
+      className="cf-turnstile"
+      data-sitekey={process.env["NEXT_PUBLIC_CF_TURNSTILE"]}
+      data-callback="BotProtectionCallback"
+    ></div>
+  );
+}
 
 export default function Home() {
   return (
@@ -108,67 +190,7 @@ export default function Home() {
             Oddzwonię w najbliższej wolnej chwili i porozmawiamy 😊
           </p>
 
-          <form className="space-y-4" action={addContact}>
-            <div>
-              <label className="block font-medium " htmlFor="email">
-                Email <span className="text-red-500">*</span>
-              </label>
-              <input
-                autoComplete="email"
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
-                placeholder="Adres email"
-              />
-            </div>
-
-            <div>
-              <label className="block font-medium " htmlFor="phone">
-                Nr Telefonu <span className="text-red-500">*</span>
-              </label>
-              <input
-                autoComplete="tel"
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
-                placeholder="Numer telefonu"
-              />
-            </div>
-
-            <div>
-              <label className="block font-medium " htmlFor="message">
-                Dodatkowe informacje, uwagi, pytania...
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Pole opcjonalne"
-                className="w-full rounded border text-black bg-white border-gray-300 p-2 mt-1"
-              ></textarea>
-            </div>
-
-            <div
-              className="cf-turnstile"
-              data-sitekey={process.env["NEXT_PUBLIC_CF_TURNSTILE"]}
-            ></div>
-
-            <button
-              type="submit"
-              className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200  mx-auto block
-      hover:bg-green-700
-      focus:bg-green-700
-      focus:outline-none
-      focus:ring-2
-      focus:ring-green-400
-      active:bg-green-900"
-            >
-              Zamawiam kontakt z agentem
-            </button>
-          </form>
+          <RequestContactForm />
         </div>
       </section>
 
