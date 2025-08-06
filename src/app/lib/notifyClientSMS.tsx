@@ -1,11 +1,13 @@
+import { HTTPError } from "ky";
 import { smsClient } from "./smsClient";
 
 export async function notifyClientSMS(
-  form: FormData,
+  form: Record<"email" | "phone" | "message", string>,
   confirmation = "Dziękuję za kontakt. Oddzwonie najszybciej jak bedę mogł."
 ) {
   try {
-    const normalizedPhone = normalizePhoneNumber(form);
+    const clientPhone = form.phone?.toString() ?? "";
+    const normalizedPhone = normalizePhoneNumber(clientPhone);
 
     const data = await smsClient.send(normalizedPhone, confirmation);
 
@@ -13,12 +15,13 @@ export async function notifyClientSMS(
 
     return data;
   } catch (e) {
+    if (e instanceof HTTPError)
+      console.error("notifyClientSMS Error", await e.response.text());
     console.error("notifyClientSMS Error", e);
   }
 }
 
-function normalizePhoneNumber(form: FormData) {
-  const clientPhone = form.get("phone")?.toString() ?? "";
+function normalizePhoneNumber(clientPhone: string) {
   const cleanedPhone = clientPhone // TODO: Test
     .replace(/[^\d]/g, "") // non digit
     .replace(/^0+/g, ""); // leading 0s

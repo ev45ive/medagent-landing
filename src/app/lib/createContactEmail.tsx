@@ -5,11 +5,17 @@ import { activeCampaignAPI, Contact, ContactList } from "./activeCampaignAPI";
 const ACTIVE_CAMPAIGN_LIST_ID = "4";
 const ACTIVE_CAMPAIGN_MESSAGE_FIELD_ID = "1";
 
-export async function createContactEmail(form: FormData) {
+export async function createContactEmail(
+  form: Record<"email" | "phone" | "message", string>,
+  options = {
+    listId: ACTIVE_CAMPAIGN_LIST_ID,
+    messageFieldId: ACTIVE_CAMPAIGN_MESSAGE_FIELD_ID,
+  }
+) {
   try {
-    const email = form.get("email");
-    const phone = form.get("phone");
-    const message = form.get("message") || "";
+    const email = form["email"];
+    const phone = form["phone"];
+    const message = form["message"];
 
     const draft = {
       contact: {
@@ -17,7 +23,7 @@ export async function createContactEmail(form: FormData) {
         phone: phone,
         fieldValues: [
           {
-            field: ACTIVE_CAMPAIGN_MESSAGE_FIELD_ID,
+            field: options.messageFieldId,
             value: message,
           },
         ],
@@ -35,7 +41,7 @@ export async function createContactEmail(form: FormData) {
       }>("contactLists", {
         json: {
           contactList: {
-            list: ACTIVE_CAMPAIGN_LIST_ID,
+            list: options.listId,
             contact: contact.id,
             status: 1,
           },
