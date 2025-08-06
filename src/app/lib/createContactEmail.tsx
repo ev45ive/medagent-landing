@@ -1,5 +1,5 @@
 import { HTTPError } from "ky";
-import { activeCampaignAPI, Contact } from "./activeCampaignAPI";
+import { activeCampaignAPI, Contact, ContactList } from "./activeCampaignAPI";
 
 // TODO: Envs
 const ACTIVE_CAMPAIGN_LIST_ID = "4";
@@ -11,7 +11,7 @@ export async function createContactEmail(form: FormData) {
     const phone = form.get("phone");
     const message = form.get("message") || "";
 
-    const json = {
+    const draft = {
       contact: {
         email: email,
         phone: phone,
@@ -24,34 +24,40 @@ export async function createContactEmail(form: FormData) {
       },
     };
 
-    const contactRes = await activeCampaignAPI
-      .post<{ contact: Contact }>("contacts", {
-        json,
-      })
-      .json();
+    const contactPostRequest = () =>
+      activeCampaignAPI.post<{ contact: Contact }>("contacts", {
+        json: draft,
+      });
 
-    const contactId = contactRes?.contact?.id;
-
-    await activeCampaignAPI.post("contactLists", {
-      json: {
-        contactList: {
-          list: ACTIVE_CAMPAIGN_LIST_ID,
-          contact: contactId,
-          status: 1,
+    const contactListRequest = (contact: Contact) =>
+      activeCampaignAPI.post<{
+        contactList: ContactList;
+      }>("contactLists", {
+        json: {
+          contactList: {
+            list: ACTIVE_CAMPAIGN_LIST_ID,
+            contact: contact.id,
+            status: 1,
+          },
         },
-      },
-    });
+      });
+
+    const { contact } = await contactPostRequest().json();
+
+    const { contactList } = await contactListRequest(contact).json();
 
     console.log("createContactEmail:", {
-      contactId,
+      id: contact.id,
       email,
       phone,
       message,
+      contact,
+      contactList,
     });
 
-    return contactId;
+    return contact.id;
   } catch (e) {
-    console.error("createContactEmail Error");
+    console.error("createContactEmail Error", e);
     if (e instanceof HTTPError)
       console.error("createContactEmail Error", await e.response.json());
   }
