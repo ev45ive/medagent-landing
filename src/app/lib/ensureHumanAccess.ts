@@ -2,6 +2,8 @@ import assert from "assert";
 import { checkBotId } from "botid/server";
 
 export async function ensureHumanAccess(form: FormData) {
+  if (process.env["VERCEL_ENV"] !== "production") return;
+
   const { isBot } = await checkBotId();
   console.log("BotId", isBot);
 
