@@ -35,7 +35,7 @@ export class SMSAPIClient {
 
     const data = await res.json();
 
-    console.log("Wysyłka SMS: ", data);
+    console.log("Wysyłka SMS: ", to, message);
 
     return await data;
   }
