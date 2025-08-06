@@ -81,7 +81,7 @@ export const GET = async (request: Request) => {
     //
   } catch (e) {
     if (e instanceof HTTPError) {
-      return Response.json(await e.response.json());
+      return Response.json(await e.response.text());
     }
     return Response.json(e);
   }
