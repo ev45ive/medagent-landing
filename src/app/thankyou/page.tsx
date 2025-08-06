@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function ThankYouPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -10,12 +12,11 @@ export default function ThankYouPage() {
         <p className="mt-4 text-gray-700">
           W najbliszym czasie skontaktuje się nasz agent.
         </p>
-        <button
-          onClick={() => history.back()}
+        <Link href={'/'}
           className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
         >
           Powrót
-        </button>
+        </Link>
       </div>
     </div>
   );

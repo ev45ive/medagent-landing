@@ -26,13 +26,33 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      
+      <link rel="dns-prefetch" href="//cloudflare.com" />
+      <link rel="dns-prefetch" href="//challenges.cloudflare.com" />
+      <link
+        rel="preconnect"
+        href="https://cloudflare.com"
+        crossOrigin="use-credentials"
+      />
+      <link
+        rel="preconnect"
+        href="https://challenges.cloudflare.com"
+        crossOrigin="use-credentials"
+      />
       {/* Cloudflare CAPTCHA */}
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js"
         strategy="afterInteractive"
       />
 
+      {/* Google Tag Manager */}
+
+      <link
+        rel="preconnect"
+        href="https://www.googletagmanager.com"
+        crossOrigin="use-credentials"
+      />
+
+      <link rel="dns-prefetch" href="//www.googletagmanager.com" />
       <Script id="googletagmanager" strategy="afterInteractive">
         {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -41,21 +61,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${process.env["NEXT_PUBLIC_GTM"]}');`}
       </Script>
 
-
-      {/* Google Analytics */}
-      {/* <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
-          `}
-      </Script> */}
       <body className={`bg-white`}>{children}</body>
     </html>
   );
