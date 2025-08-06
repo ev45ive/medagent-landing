@@ -18,8 +18,9 @@ const Header = (
     />
 
     <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center md:hidden">
-      Ubezpieczenie <br className="hidden md:inlin" />
-      OC Lekarza <span className="italic font-medium">online</span>
+      Ubezpieczenie
+      <span className="text-nowrap">OC Lekarza</span>
+      <span className="italic font-medium">online</span>
     </h1>
   </div>
 );
@@ -148,8 +149,9 @@ export default function Home() {
 
           <div className="grid gap-3 md:gap-8 content-start">
             <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center hidden md:block">
-              Ubezpieczenie <br className="hidden md:inlin" />
-              OC Lekarza <span className="italic font-medium">online</span>
+              Ubezpieczenie
+              <span className="text-nowrap">OC Lekarza</span>
+              <span className="italic font-medium">online</span>
             </h1>
             <p className="text-lg text-gray-800 text-center">
               Szukasz sprawdzonego rozwiązania w zakresie ubezpieczenia OC
