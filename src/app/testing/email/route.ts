@@ -60,10 +60,21 @@ export const GET = async (request: Request) => {
 
     return Response.json([
       step1.url.toString(),
-      Object.fromEntries(step1.headers.entries()),
+      draft,
+      step1.status,
+      step1.statusText,
       step1Response,
+      // ...
       step2.url.toString(),
-      Object.fromEntries(step2.headers.entries()),
+      {
+        contactList: {
+          list: ACTIVE_CAMPAIGN_LIST_ID,
+          contact: contact.id,
+          status: 1,
+        },
+      },
+      step2.status,
+      step2.statusText,
       step2Response,
     ]);
 
