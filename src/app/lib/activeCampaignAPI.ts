@@ -21,3 +21,19 @@ export const activeCampaignAPI = ky.create({
     "Api-Token": process.env["ACTIVECAMPAIGN_TOKEN"]!,
   },
 });
+
+export type ContactList = {
+  status: number;
+  list: string;
+  contact: string;
+  sdate: string;
+  udate: null;
+  unsubreason: string;
+  campaign: null;
+  message: null;
+  sourceid: number;
+  first_name: string;
+  last_name: string;
+  unsubscribeAutomation: null;
+  id: string;
+};

@@ -1,4 +1,4 @@
-import { activeCampaignAPI, Contact } from "@/app/lib/activeCampaign";
+import { activeCampaignAPI, Contact } from "@/app/lib/activeCampaignAPI";
 import ky from "ky";
 
 export async function GET(request: Request) {
