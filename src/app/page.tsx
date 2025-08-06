@@ -1,19 +1,19 @@
 import Image from "next/image";
 import { addContact } from "./lib/addContact";
 
-import headerImg from "../../public/11d83a0d-d2e6-4c06-8192-8a7321172561.png";
-import sebaImg from "../../public/seba.png";
-import rozmowaImg from "../../public/001cbad0-9565-4843-88f6-26b095d97611.png";
-import linkImg from "../../public/4ae010a2-dca6-4fb8-b0bd-c64516287ef4.png";
-import umowaImg from "../../public/4649ff3d-bc95-44c5-884e-ee4b51546491.jpg";
-import bgImg from "../../public/fd9800af-827c-40c9-9e02-44cdbbfa565e.png";
+import headerImg from "@public/11d83a0d-d2e6-4c06-8192-8a7321172561.png";
+import sebaImg from "@public/seba.png";
+import rozmowaImg from "@public/001cbad0-9565-4843-88f6-26b095d97611.png";
+import linkImg from "@public/4ae010a2-dca6-4fb8-b0bd-c64516287ef4.png";
+import umowaImg from "@public/4649ff3d-bc95-44c5-884e-ee4b51546491.jpg";
+import bgImg from "@public/fd9800af-827c-40c9-9e02-44cdbbfa565e.png";
 
 const Header = (
-  <div className="grid gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
+  <div className="grid gap-3 md:gap-10 md:grid-cols-2 mx-5 relative md:mb-10">
     <Image
       src={headerImg}
       alt=""
-      className="w-60 md:w-60 md:absolute z-50 mx-auto"
+      className="w-40 md:w-60 md:absolute z-50 mx-auto"
       priority
     />
 
@@ -104,7 +104,7 @@ const SebaAvatar = (
       className="object-fill w-[60%] md:w-[80%] mx-auto"
       priority
     />
-    <div className="bg-teal p-4 text-sm md:text-xl rounded-lg shadow-md text-white transform w-[80%] mx-auto text-center">
+    <div className="bg-teal p-4 text-sm md:text-xl rounded-lg shadow-md text-white transform w-full md:w-[80%] mx-auto text-center">
       Nazywam się Sebastian Nowak. <br />
       Jestem specjalistą ds. ubezpieczeń dla branży medycznej. Współpracuję
       głównie z TU Inter Polska, a także PZU, Wartą, Hestią i LLoyds.
@@ -115,7 +115,7 @@ const SebaAvatar = (
 const ZamawiamKontakt = (
   <a
     href="#form"
-    className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200 my-8 place-self-center
+    className="bg-green-800 text-white text-center px-6 py-4 rounded-lg shadow transition-colors duration-200 my-3 md:my-8 place-self-center
       hover:bg-green-700
       focus:bg-green-700
       focus:outline-none
@@ -141,9 +141,9 @@ function BotProtection() {
 export default function Home() {
   return (
     <div className="bg-white">
-      <section className="mx-auto container px-5 py-8 text-green-800 grid gap-2 md:gap-5">
+      <section className="mx-auto container px-5 py-4 md:py-8 text-green-800 grid gap-2 md:gap-5">
         {Header}
-        <div className="grid gap-10 md:grid-cols-2 mx-5 items-center">
+        <div className="grid gap-3 md:gap-10 md:grid-cols-2 mx-5 items-center">
           {SebaAvatar}
 
           <div className="grid gap-3 md:gap-8 content-start">
