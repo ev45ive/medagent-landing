@@ -48,15 +48,26 @@ export const GET = async (request: Request) => {
     });
 
   try {
-    const { contact } = await contactPostRequest().json();
+    const step1 = await contactPostRequest();
+    const step1Response = await step1.json();
 
-    const { contactList } = await contactListRequest(contact).json();
+    const { contact } = step1Response;
 
-    return Response.json({
-      draft,
-      contact,
-      contactList,
-    });
+    const step2 = await contactListRequest(contact);
+    const step2Response = await step2.json();
+
+    const { contactList } = step2Response;
+
+    return Response.json([
+      step1.url.toString(),
+      Object.fromEntries(step1.headers.entries()),
+      step1Response,
+      step2.url.toString(),
+      Object.fromEntries(step2.headers.entries()),
+      step2Response,
+    ]);
+
+    //
   } catch (e) {
     if (e instanceof HTTPError) {
       return Response.json(await e.response.json());
