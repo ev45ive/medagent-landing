@@ -19,8 +19,8 @@ const Header = (
 
     <h1 className="text-3xl md:text-5xl font-bold text-green-800 mx-5 text-center md:hidden">
       Ubezpieczenie
-      <span className="text-nowrap">OC Lekarza</span>
-      <span className="italic font-medium">online</span>
+      <span className="text-nowrap"> OC Lekarza </span>
+      <span className="italic font-medium"> online </span>
     </h1>
   </div>
 );
