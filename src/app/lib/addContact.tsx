@@ -28,7 +28,9 @@ export async function addContact(form: FormData) {
       createContactEmail(contact),
       notifyClientSMS(contact, [
         `Dziękuję za pozostawienie kontaktu na mojej stronie medagent.pl. `,
+        `\n`,
         `Oddzwonię jak tylko będę mógł, być może już za chwilę :)`,
+        `\n`,
         `Do usłyszenia!`,
         `Sebastian Nowak`,
       ]),
