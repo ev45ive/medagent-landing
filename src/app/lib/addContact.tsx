@@ -26,10 +26,12 @@ export async function addContact(form: FormData) {
         contact.message,
       ]),
       createContactEmail(contact),
-      notifyClientSMS(
-        contact,
-        "Dziękuję za kontakt. Oddzwonie najszybciej jak bedę mogł."
-      ),
+      notifyClientSMS(contact, [
+        `Dziękuję za postawienie kontaktu na mojej stronie medagent.pl. `,
+        `Oddzwonię jak tylko będę mógł, być może już za chwilę :)`,
+        `Do usłyszenia!`,
+        `Sebastian Nowak`,
+      ]),
     ]);
     // Notify client
   } catch (error: any) {

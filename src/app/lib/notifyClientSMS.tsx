@@ -3,13 +3,13 @@ import { smsClient } from "./smsClient";
 
 export async function notifyClientSMS(
   form: Record<"email" | "phone" | "message", string>,
-  confirmation = "Dziękuję za kontakt. Oddzwonie najszybciej jak bedę mogł."
+  confirmation = ["Dziękuję za kontakt. Oddzwonie najszybciej jak bedę mogł."]
 ) {
   try {
     const clientPhone = form.phone?.toString() ?? "";
     const normalizedPhone = normalizePhoneNumber(clientPhone);
 
-    const data = await smsClient.send(normalizedPhone, confirmation);
+    const data = await smsClient.send(normalizedPhone, confirmation.join(' '));
 
     console.log("notifyClientSMS:", data);
 
