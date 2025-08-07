@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function ThankYouPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center p-8 bg-white shadow-lg rounded-lg">
+      <div className="grid text-center p-8 bg-white shadow-lg rounded-lg">
         <h1 className="text-4xl font-bold text-green-600">
           Dziękujemy za zapytanie!{" "}
         </h1>
