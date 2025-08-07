@@ -34,6 +34,7 @@ export async function addContact(form: FormData) {
         `\n`,
         `\n`,
         `Do usłyszenia!`,
+        `\n`,
         `Sebastian Nowak`,
       ]),
     ]);
