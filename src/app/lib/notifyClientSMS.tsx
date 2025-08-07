@@ -9,7 +9,7 @@ export async function notifyClientSMS(
     const clientPhone = form.phone?.toString() ?? "";
     const normalizedPhone = normalizePhoneNumber(clientPhone);
 
-    const data = await smsClient.send(normalizedPhone, confirmation.join(' '));
+    const data = await smsClient.send(normalizedPhone, confirmation.join(''));
 
     console.log("notifyClientSMS:", data);
 
