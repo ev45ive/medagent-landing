@@ -34,6 +34,7 @@ export async function submitForm(form: FormData) {
         `\n`,
         `\n`,
         `Do usłyszenia!`,
+        `\n`,
         `Sebastian Nowak`,
       ]),
     ]);
