@@ -91,8 +91,9 @@ const Container: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 const Sidebar: React.FC<DivProps> = ({ className }) => (
   <aside
-    className={`bg-[#f4f8fb] border-r border-gray-200 grid content-start justify-items-center gap-6 p-4 md:p-6  ${className}`}
+    className={`bg-[#fefefe] border-r border-gray-200 grid content-start justify-items-center gap-6 p-4 md:p-6  ${className}`}
   >
+    <Logo  className="hidden sm:block w-[80%] lg:w-[60%]"/>
     <SebaAvatar />
     <nav className="w-full grid gap-2">
       {MENU.map((m) => (
@@ -110,9 +111,9 @@ const Sidebar: React.FC<DivProps> = ({ className }) => (
 
 const Header: React.FC = () => (
   <header className="flex gap-4 items-center ">
-    {/* <div className="w-42">
+    <div className="sm:hidden w-40">
       <Logo />
-    </div> */}
+    </div>
     <div>
       <h1 className="text-2xl md:text-3xl font-semibold">
         Ubezpieczenia dla zawodów medycznych <em>online</em>
@@ -129,7 +130,7 @@ type TileProps = {
 };
 // hover:scale-[1.05] transition-transform duration-300 hover:z-20
 const TileCard: React.FC<TileProps> = ({ label, img, hoverImg }) => (
-  <a className="relative group h-44 rounded overflow-hidden block hover:scale-[1.05] transition-transform duration-300 ">
+  <a className="aspect-[3/2] h-full relative group rounded overflow-hidden block hover:scale-[1.05] transition-transform duration-300 bg-black/60">
     {/* two stacked images; hover fades to the second */}
     <Image
       fill
@@ -242,7 +243,7 @@ const Main: React.FC<DivProps> = ({ className }) => (
 export default function MedagentApp() {
   return (
     <div className="bg-[#f9fafa] text-[#1d2c38]">
-      <div className="min-h-screen grid sm:grid-cols-[250px_1fr]">
+      <div className="min-h-screen grid sm:grid-cols-[250px_1fr] lg:grid-cols-[30%_1fr] max-w-[1200px] mx-auto">
         <Sidebar className="order-2 sm:order-1" />
         <Main className="order-1 " />
       </div>
@@ -252,7 +253,10 @@ export default function MedagentApp() {
 }
 
 import logoImg from "@public/11d83a0d-d2e6-4c06-8192-8a7321172561.png";
-const Logo = () => <Image src={logoImg} alt="" className="" priority />;
+
+const Logo = (props: { className?: string }) => (
+  <Image src={logoImg} alt="logo" {...props} />
+);
 
 const SebaAvatar = () => (
   <div className="grid justify-items-center">
@@ -263,9 +267,11 @@ const SebaAvatar = () => (
       priority
     />
     <div className="bg-teal p-4 text-sm  rounded-lg shadow-md text-white  text-center w-[90%]">
-      Nazywam się Sebastian Nowak. <br /><br />
-      Jestem specjalistą ds. ubezpieczeń dla branży medycznej. <br /> <br />  Współpracuję
-      głównie z TU Inter Polska, a także PZU, Wartą, Hestią i LLoyds.
+      Nazywam się Sebastian Nowak. <br />
+      <br />
+      Jestem specjalistą ds. ubezpieczeń dla branży medycznej. <br /> <br />{" "}
+      Współpracuję głównie z TU Inter Polska, a także PZU, Wartą, Hestią i
+      LLoyds.
     </div>
   </div>
 );
